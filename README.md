@@ -18,10 +18,10 @@
 ## 📁 Estrutura do Projeto
 
 ```text
-ICCRG/
-├── ICCRG.toc                       # Registro do AddOn e ordem de carregamento
+ICCRaiderGuide/
+├── ICCRaiderGuide.toc                       # Registro do AddOn e ordem de carregamento
 ├── ICCRaiderGuide.lua               # Código principal (Interface, Minimapa e Comandos)
-├── ICCJournalFrame.xml              # Estrutura XML da janela principal
+├── ICCRaiderGuide.xml              # Estrutura XML da janela principal
 └── BossData/
     ├── BossData_Core.lua           # Inicialização das tabelas e ordem dos chefes
     ├── Marrowgar.lua
