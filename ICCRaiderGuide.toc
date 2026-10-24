@@ -2,7 +2,7 @@
 ## Title: ICC Raider Guide
 ## Notes: Guia profissional de bosses da ICC com anuncio automatico no chat.
 ## Author: Kadu
-## Version: 0.9
+## Version: 1.0
 
 ICCRaiderGuide.xml
 ICCRaiderGuide.lua
