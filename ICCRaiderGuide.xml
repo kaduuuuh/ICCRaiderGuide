@@ -1,0 +1,131 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Frame name="ICCRaiderGuideFrame" parent="UIParent" hidden="true" movable="true" resizable="true" enableMouse="true">
+        <Size x="620" y="660"/> 
+        <Size x="500" y="450"/> <!-- Tamanho Mínimo -->
+        <Size x="900" y="850"/> <!-- Tamanho Máximo -->
+        <Anchors><Anchor point="CENTER"/></Anchors>
+        
+        <!-- Backdrop Tema Icecrown Citadel (Fundo escuro gélido com borda metálica) -->
+        <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+            <EdgeSize val="16"/><TileSize val="16"/>
+            <BackgroundInsets left="4" right="4" top="4" bottom="4"/>
+        </Backdrop>
+
+        <Layers>
+            <Layer level="BACKGROUND">
+                <!-- Fundo Azul Gélido / Escuro de ICC -->
+                <Texture setAllPoints="true">
+                    <Color r="0.02" g="0.05" b="0.10" a="0.92"/> 
+                </Texture>
+            </Layer>
+            <Layer level="ARTWORK">
+                <FontString name="$parentTitle" inherits="GameFontNormalLarge" text="Icecrown Citadel Raider Guide">
+                    <Anchors><Anchor point="TOP" x="-10" y="-15"/></Anchors>
+                </FontString>
+                <FontString name="ICCRaiderGuideSubtitle" inherits="GameFontHighlightSmall">
+                    <Anchors><Anchor point="TOP" x="-10" y="-35"/></Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Frames>
+            <!-- Botão de Fechar -->
+            <Button name="$parentCloseButton" inherits="UIPanelCloseButton">
+                <Anchors><Anchor point="TOPRIGHT" x="-2" y="-2"/></Anchors>
+            </Button>
+
+            <!-- Container do Texto (Responsivo) -->
+            <Frame name="ICCRaiderGuideContentBox">
+                <Anchors>
+                    <Anchor point="TOPLEFT" x="20" y="-60"/>
+                    <Anchor point="BOTTOMRIGHT" x="-85" y="55"/> 
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <!-- Fundo interno da caixa de texto (Azul-petróleo gélido) -->
+                        <Texture setAllPoints="true">
+                            <Color r="0.04" g="0.08" b="0.14" a="0.95"/>
+                        </Texture>
+                    </Layer>
+                </Layers>
+                <Backdrop edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+                    <EdgeSize val="12"/>
+                </Backdrop>
+
+                <Frames>
+                   <ScrollFrame name="ICCRaiderGuideScrollFrame" inherits="UIPanelScrollFrameTemplate">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" x="12" y="-12"/>
+                            <Anchor point="BOTTOMRIGHT" x="-30" y="12"/>
+                        </Anchors>
+                        <ScrollChild>
+                            <Frame name="ICCRaiderGuideScrollChild">
+                                <Size x="410" y="1"/>
+                                <Layers>
+                                    <Layer level="ARTWORK">
+                                        <FontString name="ICCRaiderGuideText" inherits="GameFontHighlightMedium" justifyH="LEFT" justifyV="TOP">
+                                            <Size x="410" y="0"/>
+                                            <Anchors>
+                                                <Anchor point="TOPLEFT" x="5" y="-5"/>
+                                            </Anchors>
+                                        </FontString>
+                                    </Layer>
+                                </Layers>
+                            </Frame>
+                        </ScrollChild>
+                    </ScrollFrame>
+                </Frames>
+            </Frame>
+
+            <!-- Container de Botoes no Rodapé (Responsivo) -->
+            <Frame name="ICCRaiderGuideDifficultyContainer">
+                <Size x="500" y="35"/>
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" x="20" y="10"/>
+                    <Anchor point="BOTTOMRIGHT" x="-85" y="10"/>
+                </Anchors>
+            </Frame>
+
+            <!-- Alça de Redimensionamento no Canto Inferior Direito -->
+            <Button name="$parentResizeGrip">
+                <Size x="16" y="16"/>
+                <Anchors><Anchor point="BOTTOMRIGHT" x="-4" y="4"/></Anchors>
+                <NormalTexture file="Interface\ChatFrame\UI-ChatIM-SizeGrabber-Up"/>
+                <HighlightTexture file="Interface\ChatFrame\UI-ChatIM-SizeGrabber-Highlight"/>
+                <PushedTexture file="Interface\ChatFrame\UI-ChatIM-SizeGrabber-Down"/>
+                <Scripts>
+                    <OnMouseDown>
+                        self:GetParent():StartSizing("BOTTOMRIGHT");
+                    </OnMouseDown>
+                    <OnMouseUp>
+                        self:GetParent():StopMovingOrSizing();
+                    </OnMouseUp>
+                </Scripts>
+            </Button>
+        </Frames>
+        
+        <Scripts>
+            <OnLoad>
+                self:RegisterForDrag("LeftButton");
+            </OnLoad>
+            <OnMouseDown>
+                self:StartMoving();
+            </OnMouseDown>
+            <OnMouseUp>
+                self:StopMovingOrSizing();
+            </OnMouseUp>
+            <OnSizeChanged>
+                -- Ajusta a largura da fonte interna quando a janela for redimensionada
+                if ICCRaiderGuideText and ICCRaiderGuideContentBox then
+                    local newWidth = ICCRaiderGuideContentBox:GetWidth() - 50;
+                    if newWidth > 200 then
+                        ICCRaiderGuideText:SetWidth(newWidth);
+                        if ICCRaiderGuideScrollChild then
+                            ICCRaiderGuideScrollChild:SetWidth(newWidth);
+                        end
+                    end
+                end
+            </OnSizeChanged>
+        </Scripts>
+    </Frame>
+</Ui>

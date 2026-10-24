@@ -1,0 +1,23 @@
+## Interface: 30300
+## Title: ICC Raider Guide
+## Notes: Guia profissional de bosses da ICC com anuncio automatico no chat.
+## Author: Kadu
+## Version: 1.2
+
+ICCRaiderGuide.xml
+ICCRaiderGuide.lua
+
+BossData\BossData_Core.lua
+
+BossData\Marrowgar.lua
+BossData\Deathwhisper.lua
+BossData\Gunship.lua
+BossData\Saurfang.lua
+BossData\Festergut.lua
+BossData\Rotface.lua
+BossData\ProfessorPutricide.lua
+BossData\BloodPrince.lua
+BossData\BloodQueen.lua
+BossData\Valithria.lua
+BossData\Sindragosa.lua
+BossData\LichKing.lua
