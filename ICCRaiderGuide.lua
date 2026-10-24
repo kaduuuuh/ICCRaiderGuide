@@ -278,6 +278,60 @@ SlashCmdList["ICCRG"] = function(msg)
     end
 end
 
+SLASH_ICCRG1 = "/iccrg"
+SLASH_ICCRG2 = "/ICCRG"
+
+SlashCmdList["ICCRG"] = function(msg)
+    msg = string.lower(strtrim(msg or ""))
+    mainFrame = ICCRaiderGuideFrame or ICCJournalFrame
+    
+    if msg == "-v" or msg == "-version" or msg == "v" or msg == "version" then
+        -- Busca a versão registrada no arquivo .toc
+        local version = GetAddOnMetadata("ICCRG", "Version") 
+                     or GetAddOnMetadata("ICCRaiderGuide", "Version") 
+                     or GetAddOnMetadata("ICCJournal", "Version") 
+                     or "1.0.0"
+        DEFAULT_CHAT_FRAME:AddMessage("|cffffd100[ICCRG]|r Versão atual: |cff00ff00v" .. version .. "|r")
+
+    elseif msg == "-help" or msg == "help" or msg == "-h" then
+        -- Menu de ajuda de comandos básicos
+        DEFAULT_CHAT_FRAME:AddMessage("|cffffd100--- [ICCRG] Ajuda & Comandos ---|r")
+        DEFAULT_CHAT_FRAME:AddMessage("|cff00ff00/iccrg|r : Abre ou fecha a janela principal")
+        DEFAULT_CHAT_FRAME:AddMessage("|cff00ff00/iccrg -v|r : Exibe a versão atual do AddOn")
+        DEFAULT_CHAT_FRAME:AddMessage("|cff00ff00/iccrg -pt|r : Muda o idioma do guia para Português")
+        DEFAULT_CHAT_FRAME:AddMessage("|cff00ff00/iccrg -en|r : Muda o idioma do guia para Inglês")
+        DEFAULT_CHAT_FRAME:AddMessage("|cff00ff00/iccrg -help|r : Exibe este menu de ajuda")
+
+    elseif msg == "-en" or msg == "en" then
+        currentLang = "EN"
+        if ICCRaiderGuideDB then ICCRaiderGuideDB.lang = currentLang end
+        if langBtn then langBtn:SetText("Lang: " .. currentLang) end
+        UpdateJournal(currentBoss, currentDiff)
+        DEFAULT_CHAT_FRAME:AddMessage("|cffffd100[ICCRG]|r Language changed to English.")
+
+    elseif msg == "-pt" or msg == "pt" then
+        currentLang = "PT"
+        if ICCRaiderGuideDB then ICCRaiderGuideDB.lang = currentLang end
+        if langBtn then langBtn:SetText("Lang: " .. currentLang) end
+        UpdateJournal(currentBoss, currentDiff)
+        DEFAULT_CHAT_FRAME:AddMessage("|cffffd100[ICCRG]|r Idioma alterado para Português.")
+
+    elseif msg == "" then
+        -- Sem argumentos: apenas abre/fecha a janela
+        if mainFrame then
+            if mainFrame:IsShown() then 
+                mainFrame:Hide() 
+            else 
+                mainFrame:Show() 
+            end
+        end
+
+    else
+        -- Comando inválido
+        DEFAULT_CHAT_FRAME:AddMessage("|cffff0000[ICCRG]|r Comando não reconhecido. Use |cff00ff00/iccrg -help|r para ver a lista de comandos.")
+    end
+end
+
 -------------------------------------------------------------------------------
 -- BOTÃO CIRCULAR NO MINIMAPA
 -------------------------------------------------------------------------------

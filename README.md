@@ -15,6 +15,20 @@
 
 ---
 
+## 💬 Comandos no Jogo (Slash Commands)
+
+Você pode interagir com o AddOn diretamente pelo chat do jogo utilizando o comando `/iccrg`:
+
+| Comando | Descrição |
+| :--- | :--- |
+| `/iccrg` | Abre ou fecha a janela principal do guia |
+| `/iccrg -v` | Exibe a versão atual instalada do AddOn |
+| `/iccrg -help` | Exibe o menu de ajuda com a lista de comandos no chat |
+| `/iccrg -pt` | Altera o idioma das táticas para **Português** |
+| `/iccrg -en` | Altera o idioma das táticas para **Inglês** |
+
+---
+
 ## 📁 Estrutura do Projeto
 
 ```text
